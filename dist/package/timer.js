@@ -12,11 +12,11 @@ var Timer = /** @class */ (function () {
         this.minuteSpan = document.getElementById("minuteSpan");
         this.hourSpan = document.getElementById("hourSpan");
         this.startBtn.addEventListener("click", function () {
-            console.log("O timer começou");
+            // console.log("O timer começou");
             _this.startBtn.classList.toggle("hide");
             _this.pauseBtn.classList.toggle("hide");
             _this.status = true;
-            setInterval(function () {
+            _this.interval = setInterval(function () {
                 if (_this.status === true) {
                     switch (true) {
                         case _this.second === 60:
@@ -70,7 +70,7 @@ var Timer = /** @class */ (function () {
             _this.startBtn.classList.remove("hide");
             _this.pauseBtn.classList.add("hide");
             _this.resumeBtn.classList.add("hide");
-            _this.status = false;
+            clearInterval(_this.interval);
             _this.second = 0;
             _this.minute = 0;
             _this.hour = 0;

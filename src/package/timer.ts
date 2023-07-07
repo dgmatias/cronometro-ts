@@ -4,6 +4,7 @@ class Timer {
     minute: number = 0;
     hour: number = 0;
     status: boolean;
+    interval: number | undefined;
 
     secondSpan: HTMLSpanElement;
     minuteSpan: HTMLSpanElement;
@@ -24,13 +25,13 @@ class Timer {
         this.hourSpan = document.getElementById("hourSpan");
 
         this.startBtn.addEventListener("click", ()=>{
-            console.log("O timer começou");
+            // console.log("O timer começou");
 
             this.startBtn.classList.toggle("hide");
             this.pauseBtn.classList.toggle("hide");
             this.status = true;
 
-            setInterval(()=>{
+            this.interval = setInterval(()=>{
 
                 if (this.status === true) {
                     
@@ -54,7 +55,6 @@ class Timer {
                 this.hourSpan.textContent = this.hour < 10 ? `0${this.hour.toString()}` : this.hour.toString();
 
             }, 1000);
-
         })
     }
 
@@ -103,11 +103,10 @@ class Timer {
             this.pauseBtn.classList.add("hide");
             this.resumeBtn.classList.add("hide");
 
-            this.status = false;
+            clearInterval(this.interval);
             this.second = 0;
             this.minute = 0;
             this.hour = 0;
-
             this.secondSpan.textContent = `0${this.second.toString()}`;
             this.minuteSpan.textContent = `0${this.minute.toString()}`;
             this.hourSpan.textContent = `0${this.hour.toString()}`;
